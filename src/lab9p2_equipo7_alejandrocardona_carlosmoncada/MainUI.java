@@ -4,6 +4,9 @@
  */
 package lab9p2_equipo7_alejandrocardona_carlosmoncada;
 
+import java.awt.Color;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author jets
@@ -54,7 +57,7 @@ public class MainUI extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         Country = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        Postal = new javax.swing.JTextField();
+        PostalCode = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         Category = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
@@ -67,6 +70,8 @@ public class MainUI extends javax.swing.JFrame {
         Region = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         Sub_Category = new javax.swing.JTextField();
+        jLabel20 = new javax.swing.JLabel();
+        Profit = new javax.swing.JTextField();
         PanelList = new javax.swing.JPanel();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -80,7 +85,7 @@ public class MainUI extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jProgressBar1 = new javax.swing.JProgressBar();
+        PB = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +108,11 @@ public class MainUI extends javax.swing.JFrame {
         jLabel9.setText("Discount");
 
         jButton1.setText("Agregar Registro");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jLabel10.setText("Order Date:");
 
@@ -123,6 +133,8 @@ public class MainUI extends javax.swing.JFrame {
         jLabel18.setText("Region:");
 
         jLabel19.setText("Sub-Category");
+
+        jLabel20.setText("Profit");
 
         javax.swing.GroupLayout PanelAgregarLayout = new javax.swing.GroupLayout(PanelAgregar);
         PanelAgregar.setLayout(PanelAgregarLayout);
@@ -165,10 +177,14 @@ public class MainUI extends javax.swing.JFrame {
                                         .addComponent(jLabel8)
                                         .addGap(18, 18, 18)
                                         .addComponent(Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(81, 81, 81)
+                                        .addGap(65, 65, 65)
                                         .addComponent(jLabel9)
-                                        .addGap(28, 28, 28)
-                                        .addComponent(Discount, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Discount, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(33, 33, 33)
+                                        .addComponent(jLabel20)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Profit))
                                     .addGroup(PanelAgregarLayout.createSequentialGroup()
                                         .addGap(104, 104, 104)
                                         .addGroup(PanelAgregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -179,7 +195,7 @@ public class MainUI extends javax.swing.JFrame {
                                             .addGroup(PanelAgregarLayout.createSequentialGroup()
                                                 .addComponent(jLabel13)
                                                 .addGap(18, 18, 18)
-                                                .addComponent(Postal))
+                                                .addComponent(PostalCode))
                                             .addGroup(PanelAgregarLayout.createSequentialGroup()
                                                 .addComponent(jLabel12)
                                                 .addGap(18, 18, 18)
@@ -256,7 +272,7 @@ public class MainUI extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(State, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(Postal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(PostalCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18)
                     .addComponent(Region, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -278,7 +294,9 @@ public class MainUI extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addComponent(Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(Discount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Discount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(Profit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30))
@@ -287,12 +305,32 @@ public class MainUI extends javax.swing.JFrame {
         jTabbedPane1.addTab("Agregar Registro", PanelAgregar);
 
         jButton2.setText("Orders");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         jButton3.setText("Details");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jButton4.setText("Customers");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         jButton5.setText("Products");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         jButton6.setText("Clear");
 
@@ -386,14 +424,14 @@ public class MainUI extends javax.swing.JFrame {
             .addComponent(jTabbedPane1)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addComponent(PB, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -401,6 +439,82 @@ public class MainUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        
+        AdministradorPB apb = new AdministradorPB(300, PB, Color.yellow, true);
+        apb.setMessage("Se ha agregado a la base de datos de manera exitosa");
+        apb.start();
+        
+        
+        String orderid=Order.getText();
+        String shipmode=Ship.getText();
+        String segment=Segment.getText();
+        String state=State.getText();
+        String productoid=ProductID.getText();
+        String  productname=ProductName.getText();
+        String sales=Sales.getText();
+        String cuantity=Quantity.getText();
+        String discount=Discount.getText();
+        String profit=Profit.getText();
+        String orderdate=OrderDate.getText();
+        String costumerid=CustomerID.getText();
+        String country=Country.getText();
+        String postalcode=PostalCode.getText();
+        String category=Category.getText();
+        String shipdate=ShipDate.getText();
+        String customername=CustomerName.getText();
+        String city=City.getText();
+        String region=Region.getText();
+        String subcategory=Sub_Category.getText();
+        try {
+            Dba db= new Dba("./Base.accdb");
+            db.conectar();
+            db.query.execute("insert into TenRecord values (,"+orderid+","+orderdate+","+shipdate+","+shipmode+","+costumerid+","+customername+","+segment+","+country+","+city+","+state+","+postalcode+","+region+","+productoid+","+category+","+subcategory+","+productname+","+sales+","+cuantity+","+discount+","+profit);
+                 db.commit();
+                 db.desconectar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        
+        AdministradorPB apb = new AdministradorPB(200, PB, Color.yellow, true);
+        apb.setMessage("Se ha listado la base de datos de manera exitosa");
+        apb.start();
+        
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        
+        AdministradorPB apb = new AdministradorPB(250, PB, Color.yellow, true);
+        apb.setMessage("Se ha listado la base de datos de manera exitosa");
+        apb.start();
+        
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        // TODO add your handling code here:
+        
+        AdministradorPB apb = new AdministradorPB(300, PB, Color.yellow, true);
+        apb.setMessage("Se ha listado la base de datos de manera exitosa");
+        apb.start();
+        
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        // TODO add your handling code here:
+        
+        AdministradorPB apb = new AdministradorPB(150, PB, Color.yellow, true);
+        apb.setMessage("Se ha listado la base de datos de manera exitosa");
+        apb.start();
+        
+    }//GEN-LAST:event_jButton5MouseClicked
 
     /**
      * @param args the command line arguments
@@ -446,12 +560,14 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JTextField Discount;
     private javax.swing.JTextField Order;
     private javax.swing.JTextField OrderDate;
+    private javax.swing.JProgressBar PB;
     private javax.swing.JPanel PanelAgregar;
     private javax.swing.JPanel PanelElim;
     private javax.swing.JPanel PanelList;
-    private javax.swing.JTextField Postal;
+    private javax.swing.JTextField PostalCode;
     private javax.swing.JTextField ProductID;
     private javax.swing.JTextField ProductName;
+    private javax.swing.JTextField Profit;
     private javax.swing.JTextField Quantity;
     private javax.swing.JTextField Region;
     private javax.swing.JTextField Sales;
@@ -480,6 +596,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -487,7 +604,6 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
