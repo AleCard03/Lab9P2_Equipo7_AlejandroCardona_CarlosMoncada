@@ -6,6 +6,9 @@ package lab9p2_equipo7_alejandrocardona_carlosmoncada;
 
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -18,6 +21,7 @@ public class MainUI extends javax.swing.JFrame {
      */
     public MainUI() {
         initComponents();
+        listDB();
     }
 
     /**
@@ -79,10 +83,10 @@ public class MainUI extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        TA_Listar = new javax.swing.JTextArea();
         PanelElim = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Table_Elim = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         PB = new javax.swing.JProgressBar();
@@ -334,9 +338,9 @@ public class MainUI extends javax.swing.JFrame {
 
         jButton6.setText("Clear");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        TA_Listar.setColumns(20);
+        TA_Listar.setRows(5);
+        jScrollPane1.setViewportView(TA_Listar);
 
         javax.swing.GroupLayout PanelListLayout = new javax.swing.GroupLayout(PanelList);
         PanelList.setLayout(PanelListLayout);
@@ -375,7 +379,7 @@ public class MainUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Listar Registros", PanelList);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Table_Elim.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -383,11 +387,24 @@ public class MainUI extends javax.swing.JFrame {
                 "Row ID", "Order ID", "Order Date", "Customer ID", "Country", "City", "Product ID", "Sales"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(Table_Elim);
 
         jButton7.setText("Update Table");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jButton7MouseEntered(evt);
+            }
+        });
 
         jButton8.setText("Eliminar Registro");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelElimLayout = new javax.swing.GroupLayout(PanelElim);
         PanelElim.setLayout(PanelElimLayout);
@@ -468,16 +485,16 @@ public class MainUI extends javax.swing.JFrame {
         String city=City.getText();
         String region=Region.getText();
         String subcategory=Sub_Category.getText();
+        Dba db= new Dba("./Nilaccdb.accdb");
+
         try {
-            Dba db= new Dba("./Base.accdb");
-            db.conectar();
-            db.query.execute("insert into TenRecord values (,"+orderid+","+orderdate+","+shipdate+","+shipmode+","+costumerid+","+customername+","+segment+","+country+","+city+","+state+","+postalcode+","+region+","+productoid+","+category+","+subcategory+","+productname+","+sales+","+cuantity+","+discount+","+profit);
-                 db.commit();
-                 db.desconectar();
-        } catch (Exception e) {
+                        db.conectar();
+db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Ship Mode],[Customer ID],[Customer name],[Segment],[Country],[City],[State],[Postal Code],[Region],[Product ID],[Category],[Sub-Category],[Product Name],[Sales],[Quantity],[Discount],[Profit])VALUES ('" + orderid + "', " + orderdate + ", '" + shipdate + "', '" + shipmode + "', '" + costumerid + "', '" + customername + "', '" + segment + "', '" + country + "', '" + city + "', '" + state + "', " + postalcode + ", '" + region + "', '" + productoid + "', '" + category + "', '" + subcategory + "', '" + productname + "', " + sales + ", " + cuantity + ", " + discount + ", " + profit + ")");            db.commit();
+        } 
+        catch (Exception e) {
             e.printStackTrace();
         }
-        
+       db.desconectar();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -516,6 +533,32 @@ public class MainUI extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton5MouseClicked
 
+    private void jButton7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton7MouseEntered
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        // TODO add your handling code here:
+        
+        DefaultTableModel modelo = (DefaultTableModel) Table_Elim.getModel();
+        int x =modelo.getRowCount();
+        for(int i = 0; i<x; i++){
+            
+            modelo.removeRow(0);
+            
+        }
+        Table_Elim.setModel(modelo);
+        listDB();
+        
+    }//GEN-LAST:event_jButton7MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+        // TODO add your handling code here:
+        
+        delDB();
+        
+    }//GEN-LAST:event_jButton8MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -550,6 +593,51 @@ public class MainUI extends javax.swing.JFrame {
             }
         });
     }
+    private void listDB(){
+        DefaultTableModel modelo = (DefaultTableModel) Table_Elim.getModel();
+        
+        
+        Dba db = new Dba("./Nilaccdb.accdb");
+        db.conectar();
+        try {
+            
+            
+            db.query.execute("select Id, OrderID, OrderDate, CustomerID,Country,City,ProductID,Sales from TenRecord");
+            ResultSet rs = db.query.getResultSet();
+            while (rs.next()) {
+                String RowID = rs.getString(1);
+                String OrderID = rs.getString(2);
+                String orderDate = rs.getString(3);
+                String customerID = rs.getString(4);
+                String country = rs.getString(5);
+                String city = rs.getString(6);
+                String productID = rs.getString(7);
+                String sales = rs.getString(8);
+                Object [] arreglo = {RowID, OrderID, orderDate, customerID, country, city, productID, sales};
+                modelo.addRow(arreglo);
+                
+            }
+            Table_Elim.setModel(modelo);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
+        
+    }
+    private void delDB(){
+        
+        Dba db = new Dba("./Nilaccdb.accdb");
+        db.conectar();
+        int selElim = Integer.parseInt((String)Table_Elim.getValueAt(Table_Elim.getSelectedRow(), 0));
+        try {
+            db.query.execute("delete from TenRecord where Id="+selElim);
+            db.commit();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Category;
@@ -576,6 +664,8 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JTextField ShipDate;
     private javax.swing.JTextField State;
     private javax.swing.JTextField Sub_Category;
+    private javax.swing.JTextArea TA_Listar;
+    private javax.swing.JTable Table_Elim;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -607,7 +697,5 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }
