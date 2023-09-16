@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import java.sql.*;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import javax.swing.JTextField;
 
 
 /**
@@ -466,35 +468,57 @@ public class MainUI extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
+        ArrayList<JTextField> tfs = new ArrayList();
         
-        AdministradorPB apb = new AdministradorPB(300, PB,true);
-        apb.setMessage("Se ha agregado a la base de datos de manera exitosa");
+        UIManager.put("nimbusOrange", Color.yellow);
         
         
         
         String orderid=Order.getText();
+        tfs.add(Order);
         String shipmode=Ship.getText();
+        tfs.add(Ship);
         String segment=Segment.getText();
+        tfs.add(Segment);
         String state=State.getText();
+        tfs.add(State);
         String productoid=ProductID.getText();
+        tfs.add(ProductID);
         String productname=ProductName.getText();
+        tfs.add(ProductName);
         String sales=Sales.getText();
+        tfs.add(Sales);
         String cuantity=Quantity.getText();
+        tfs.add(Quantity);
         String discount=Discount.getText();
+        tfs.add(Discount);
         String profit=Profit.getText();
+        tfs.add(Profit);
         String orderdate=OrderDate.getText();
+        tfs.add(OrderDate);
         String costumerid=CustomerID.getText();
+        tfs.add(CustomerID);
         String country=Country.getText();
+        tfs.add(Country);
         String postalcode=PostalCode.getText();
+        tfs.add(PostalCode);
         String category=Category.getText();
+        tfs.add(Category);
         String shipdate=ShipDate.getText();
+        tfs.add(ShipDate);
         String customername=CustomerName.getText();
+        tfs.add(CustomerName);
         String city=City.getText();
+        tfs.add(City);
         String region=Region.getText();
+        tfs.add(Region);
         String subcategory=Sub_Category.getText();
+        tfs.add(Sub_Category);
 
         Agregar a = new Agregar(orderid, orderdate, shipdate, shipmode, costumerid, customername, segment, country, city, state, postalcode, region, productoid, category, subcategory, productname, sales, cuantity, discount, profit);
+        AdministradorPB apb = new AdministradorPB(300, PB,true,tfs);
         apb.start();
+        apb.setMessage("Se ha agregado a la base de datos de manera exitosa");
         
     }//GEN-LAST:event_jButton1MouseClicked
 

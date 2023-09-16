@@ -1,10 +1,12 @@
 package lab9p2_equipo7_alejandrocardona_carlosmoncada;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.UIManager;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class AdministradorPB extends Thread {
 
@@ -15,6 +17,7 @@ public class AdministradorPB extends Thread {
     private String message;
     private JTextArea ta;
     private String imprimir;
+    private ArrayList<JTextField> tfs;
 
     public AdministradorPB(int delay, JProgressBar pb, boolean run) {
         setVivo(true);
@@ -24,6 +27,16 @@ public class AdministradorPB extends Thread {
         this.ta = null;
         
     }
+    
+    public AdministradorPB(int delay, JProgressBar pb, boolean run, ArrayList<JTextField> tfs) {
+        setVivo(true);
+        this.delay = delay;
+        this.pb = pb;
+        this.run = run;
+        this.ta = null;
+        this.tfs = tfs;
+        
+    }
 
     public AdministradorPB(int delay, JProgressBar pb, boolean run, JTextArea ta, String imprimir) {
         this.delay = delay;
@@ -31,6 +44,7 @@ public class AdministradorPB extends Thread {
         this.run = run;
         this.ta = ta;
         this.imprimir = imprimir;
+        this.tfs = null;
     }
     
     
@@ -81,6 +95,15 @@ public class AdministradorPB extends Thread {
                     if(ta != null){
                         
                         ta.setText(imprimir);
+                        
+                    }
+                    else if(tfs != null){
+                        
+                        for (JTextField tf : tfs) {
+                            
+                            tf.setText("");
+                            
+                        }
                         
                     }
                 }
