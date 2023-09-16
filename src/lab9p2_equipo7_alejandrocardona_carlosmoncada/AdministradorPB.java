@@ -9,18 +9,16 @@ public class AdministradorPB extends Thread {
 
     private int delay;
     private JProgressBar pb;
-    private Color color;
     private boolean run;
     private boolean vivo;
     private String message;
 
-    public AdministradorPB(int delay, JProgressBar pb, Color color, boolean run) {
+    public AdministradorPB(int delay, JProgressBar pb, boolean run) {
         setVivo(true);
         this.delay = delay;
         this.pb = pb;
-        this.color = color;
         this.run = run;
-        UIManager.put("nimbusOrange", color);
+        
     }
     //delay -> 300 para 6 segundos
 
@@ -38,6 +36,14 @@ public class AdministradorPB extends Thread {
 
     public void setVivo(boolean vivo) {
         this.vivo = vivo;
+    }
+
+    public JProgressBar getPb() {
+        return pb;
+    }
+
+    public void setPb(JProgressBar pb) {
+        this.pb = pb;
     }
 
     

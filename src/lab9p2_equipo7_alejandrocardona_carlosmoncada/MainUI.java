@@ -7,6 +7,7 @@ package lab9p2_equipo7_alejandrocardona_carlosmoncada;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.sql.*;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -466,7 +467,7 @@ public class MainUI extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         
-        AdministradorPB apb = new AdministradorPB(300, PB, Color.yellow, true);
+        AdministradorPB apb = new AdministradorPB(300, PB,true);
         apb.setMessage("Se ha agregado a la base de datos de manera exitosa");
         apb.start();
         
@@ -500,7 +501,8 @@ public class MainUI extends javax.swing.JFrame {
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         
-        AdministradorPB apb = new AdministradorPB(200, PB, Color.green, true);
+        UIManager.put("nimbusOrange", Color.green);
+        AdministradorPB apb = new AdministradorPB(200, PB, true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         
@@ -508,7 +510,7 @@ public class MainUI extends javax.swing.JFrame {
         Dba db = new Dba("./Nilaccdb.accdb");
         db.conectar();
         try {
-            db.query.execute("select OrderID,OrderDate,ShipDate,ShipMode,CustomerID from TenRecord");
+            db.query.execute("select [Order ID],[Order Date],[Ship Date],[Ship Mode],[Customer ID] from TenRecord");
             ResultSet rs = db.query.getResultSet();
             String salida = "";
             while (rs.next()) {
@@ -524,7 +526,11 @@ public class MainUI extends javax.swing.JFrame {
                 salida += "\tcostumerid:" + costumerid + "\n\n\n";
 
             }
-            TA_Listar.setText(salida);
+            
+            if(apb.getPb().getValue()==100){
+                TA_Listar.setText(salida);
+            }
+            
         } catch (Exception e) {
         }
         
@@ -533,14 +539,15 @@ public class MainUI extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
         
-        AdministradorPB apb = new AdministradorPB(250, PB, Color.orange, true);
+        UIManager.put("nimbusOrange", Color.orange);
+        AdministradorPB apb = new AdministradorPB(250, PB,true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         
         Dba db = new Dba("./Nilaccdb.accdb");
         db.conectar();
         try {
-            db.query.execute("select  OrderID, ProductID, Sales, Quantity, Discount, Profit from TenRecord");
+            db.query.execute("select  [Order ID], [Product ID], Sales, Quantity, Discount, Profit from TenRecord");
             ResultSet rs = db.query.getResultSet();
             String salida = "";
             while (rs.next()) {
@@ -566,8 +573,8 @@ public class MainUI extends javax.swing.JFrame {
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
         
-
-        AdministradorPB apb = new AdministradorPB(300, PB, Color.red, true);
+UIManager.put("nimbusOrange", Color.red);
+        AdministradorPB apb = new AdministradorPB(300, PB, true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         
@@ -578,7 +585,7 @@ public class MainUI extends javax.swing.JFrame {
         try {
             
             String acum = "";
-            db.query.execute("select Id,CustomerID,CustomerName,Country,City,State,PostalCode,Region FROM TenRecord");
+            db.query.execute("select Id,[Customer ID],[Customer Name],Country,City,State,[Postal Code],Region FROM TenRecord");
             ResultSet rs = db.query.getResultSet();
             while (rs.next()) {
                 String ID = rs.getString(1);
@@ -606,7 +613,8 @@ public class MainUI extends javax.swing.JFrame {
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
         
-        AdministradorPB apb = new AdministradorPB(150, PB, Color.blue, true);
+        UIManager.put("nimbusOrange", Color.blue);
+        AdministradorPB apb = new AdministradorPB(150, PB,true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         Dba db = new Dba("./Nilaccdb.accdb");
@@ -614,7 +622,7 @@ public class MainUI extends javax.swing.JFrame {
         try {
             
             String acum = "";
-            db.query.execute("select Id,ProductID,Category,SubCategory,ProductName,Sales,Quantity,Discount,Profit FROM TenRecord");
+            db.query.execute("select Id,[Product ID],Category,[Sub-Category],[Product Name],Sales,Quantity,Discount,Profit FROM TenRecord");
             ResultSet rs = db.query.getResultSet();
             while (rs.next()) {
                 String ID = rs.getString(1);
@@ -714,7 +722,7 @@ public class MainUI extends javax.swing.JFrame {
         try {
             
             
-            db.query.execute("select Id, OrderID, OrderDate, CustomerID,Country,City,ProductID,Sales from TenRecord");
+            db.query.execute("select Id, [Order ID], [Order Date], [Customer ID],Country,City,[Product ID],Sales from TenRecord");
             ResultSet rs = db.query.getResultSet();
             while (rs.next()) {
                 String RowID = rs.getString(1);

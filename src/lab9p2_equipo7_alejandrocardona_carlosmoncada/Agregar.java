@@ -203,7 +203,7 @@ public class Agregar {
         db.conectar();
         try {
             db.query.execute("INSERT INTO TenRecord"
-                    + " ([OrderID], [OrderDate], [ShipDate], [ShipMode], [CustomerID], [CustomerName], [Segment], [Country], [City], [State], [PostalCode], [Region], [ProductID], [Category], [SubCategory], [ProductName], [Sales], [Quantity], [Discount], [Profit])"
+                    + " ([Order ID], [Order Date], [Ship Date], [Ship Mode], [Customer ID], [Customer Name], [Segment], [Country], [City], [State], [Postal Code], [Region], [Product ID], [Category], [Sub-Category], [Product Name], [Sales], [Quantity], [Discount], [Profit])"
                     + " VALUES ('" + orderID + "', '" + orderDate + "', '" + shipDate + "', '" + shipMode + "', '" + customerID + "', '" + customerName + "', '" + segment + "', '" + country + "', '" + city + "', '" + state + "', '" + postalCode + "', '" + region + "', '" + productID + "', '" + category + "', '" + sub_Category + "', '" + productName + "', '" + Sales + "', '" + quantity + "', '" + discount + "', '" + profit + "');");
             db.commit();
         } catch (SQLException ex) {
