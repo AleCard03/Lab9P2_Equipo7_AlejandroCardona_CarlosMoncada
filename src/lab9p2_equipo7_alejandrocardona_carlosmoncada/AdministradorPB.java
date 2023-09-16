@@ -3,6 +3,7 @@ package lab9p2_equipo7_alejandrocardona_carlosmoncada;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.UIManager;
 
 public class AdministradorPB extends Thread {
 
@@ -19,6 +20,7 @@ public class AdministradorPB extends Thread {
         this.pb = pb;
         this.color = color;
         this.run = run;
+        UIManager.put("nimbusOrange", color);
     }
     //delay -> 300 para 6 segundos
 
@@ -44,7 +46,7 @@ public class AdministradorPB extends Thread {
     public void run() {
         setVivo(true);
         pb.setValue(0);
-        pb.setBackground(color);
+        
         while (run) {
 
             try {

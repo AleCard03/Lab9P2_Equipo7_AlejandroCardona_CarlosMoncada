@@ -22,6 +22,7 @@ public class MainUI extends javax.swing.JFrame {
     public MainUI() {
         initComponents();
         listDB();
+        PB.setStringPainted(true);
     }
 
     /**
@@ -475,7 +476,7 @@ public class MainUI extends javax.swing.JFrame {
         String segment=Segment.getText();
         String state=State.getText();
         String productoid=ProductID.getText();
-        String  productname=ProductName.getText();
+        String productname=ProductName.getText();
         String sales=Sales.getText();
         String cuantity=Quantity.getText();
         String discount=Discount.getText();
@@ -490,22 +491,16 @@ public class MainUI extends javax.swing.JFrame {
         String city=City.getText();
         String region=Region.getText();
         String subcategory=Sub_Category.getText();
-        Dba db= new Dba("./Nilaccdb.accdb");
 
-        try {
-                        db.conectar();
-db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Ship Mode],[Customer ID],[Customer name],[Segment],[Country],[City],[State],[Postal Code],[Region],[Product ID],[Category],[Sub-Category],[Product Name],[Sales],[Quantity],[Discount],[Profit])VALUES ('" + orderid + "', " + orderdate + ", '" + shipdate + "', '" + shipmode + "', '" + costumerid + "', '" + customername + "', '" + segment + "', '" + country + "', '" + city + "', '" + state + "', " + postalcode + ", '" + region + "', '" + productoid + "', '" + category + "', '" + subcategory + "', '" + productname + "', " + sales + ", " + cuantity + ", " + discount + ", " + profit + ")");            db.commit();
-        } 
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-       db.desconectar();
+        Agregar a = new Agregar(orderid, orderdate, shipdate, shipmode, costumerid, customername, segment, country, city, state, postalcode, region, productoid, category, subcategory, productname, sales, cuantity, discount, profit);
+        
+        
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
         
-        AdministradorPB apb = new AdministradorPB(200, PB, Color.yellow, true);
+        AdministradorPB apb = new AdministradorPB(200, PB, Color.green, true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         
@@ -538,7 +533,7 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
         
-        AdministradorPB apb = new AdministradorPB(250, PB, Color.yellow, true);
+        AdministradorPB apb = new AdministradorPB(250, PB, Color.orange, true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         
@@ -572,7 +567,7 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
         // TODO add your handling code here:
         
 
-        AdministradorPB apb = new AdministradorPB(300, PB, Color.yellow, true);
+        AdministradorPB apb = new AdministradorPB(300, PB, Color.red, true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         
@@ -594,7 +589,7 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
                 String country = rs.getString(6);
                 String city = rs.getString(7);
                 String productID = rs.getString(8);
-                acum+="Registro "+ID+"   "+RowID+" "+OrderID+" "+orderDate+" "+customerID+" "+country+" "+city+" "+productID+"\n";
+                acum+="Registro "+ID+"  \n "+RowID+" \n"+OrderID+"\n "+orderDate+" \n"+customerID+"\n "+country+" \n"+city+" \n"+productID+"\n\n\n";
                 
             }
             TA_Listar.setText(acum);
@@ -611,7 +606,7 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         // TODO add your handling code here:
         
-        AdministradorPB apb = new AdministradorPB(150, PB, Color.yellow, true);
+        AdministradorPB apb = new AdministradorPB(150, PB, Color.blue, true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         Dba db = new Dba("./Nilaccdb.accdb");
@@ -631,7 +626,7 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
                 String city = rs.getString(7);
                 String productID = rs.getString(8);
                 String profit = rs.getString(9);
-                acum+="Registro "+ID+"   "+RowID+" "+OrderID+" "+orderDate+" "+customerID+" "+country+" "+city+" "+productID+" "+profit+"\n";
+                acum+="Registro "+ID+"  \n "+RowID+"\n "+OrderID+" \n "+orderDate+" "+customerID+"\n "+country+"\n "+city+" \n"+productID+" \n"+profit+"\n\n\n";
                 
             }
             TA_Listar.setText(acum);
