@@ -337,6 +337,11 @@ public class MainUI extends javax.swing.JFrame {
         });
 
         jButton6.setText("Clear");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
 
         TA_Listar.setColumns(20);
         TA_Listar.setRows(5);
@@ -504,6 +509,30 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         
+        
+        Dba db = new Dba("./Nilaccdb.accdb");
+        db.conectar();
+        try {
+            db.query.execute("select OrderID,OrderDate,ShipDate,ShipMode,CustomerID from TenRecord");
+            ResultSet rs = db.query.getResultSet();
+            String salida = "";
+            while (rs.next()) {
+                String orderid = rs.getString(1);
+                String OrderDate = rs.getString(2);
+                String Shipdate = rs.getString(3);
+                String shipMode = rs.getString(4);
+                String costumerid = rs.getString(5);
+                salida += "\tRecord:" + orderid + "\n";
+                salida += "\tOrder id:" + OrderDate + "\n";
+                salida += "\tOrderDate:" + Shipdate + "\n";
+                salida += "\tshipMode:" + shipMode + "\n";
+                salida += "\tcostumerid:" + costumerid + "\n\n\n";
+
+            }
+            TA_Listar.setText(salida);
+        } catch (Exception e) {
+        }
+        
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
@@ -513,14 +542,69 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
         
+        Dba db = new Dba("./Nilaccdb.accdb");
+        db.conectar();
+        try {
+            db.query.execute("select  OrderID, ProductID, Sales, Quantity, Discount, Profit from TenRecord");
+            ResultSet rs = db.query.getResultSet();
+            String salida = "";
+            while (rs.next()) {
+                String orderid = rs.getString(1);
+                String productid = rs.getString(2);
+                String sales = rs.getString(3);
+                String quantity = rs.getString(4);
+                String discount = rs.getString(5);
+
+                salida += "\tRegistro:" + orderid + "\n";
+                salida += "\tproductid:" + productid + "\n";
+                salida += "\tsales:" + sales + "\n";
+                salida += "\tquantity:" + quantity + "\n";
+                salida += "\tdiscount:" + discount + "\n\n\n";
+
+            }
+            TA_Listar.setText(salida);
+        } catch (Exception e) {
+        }
+        
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         // TODO add your handling code here:
         
+
         AdministradorPB apb = new AdministradorPB(300, PB, Color.yellow, true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
+        
+        
+        
+        Dba db = new Dba("./Nilaccdb.accdb");
+        db.conectar();
+        try {
+            
+            String acum = "";
+            db.query.execute("select Id,CustomerID,CustomerName,Country,City,State,PostalCode,Region FROM TenRecord");
+            ResultSet rs = db.query.getResultSet();
+            while (rs.next()) {
+                String ID = rs.getString(1);
+                String RowID = rs.getString(2);
+                String OrderID = rs.getString(3);
+                String orderDate = rs.getString(4);
+                String customerID = rs.getString(5);
+                String country = rs.getString(6);
+                String city = rs.getString(7);
+                String productID = rs.getString(8);
+                acum+="Registro "+ID+"   "+RowID+" "+OrderID+" "+orderDate+" "+customerID+" "+country+" "+city+" "+productID+"\n";
+                
+            }
+            TA_Listar.setText(acum);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
+        
+        
+        
         
     }//GEN-LAST:event_jButton4MouseClicked
 
@@ -530,6 +614,31 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
         AdministradorPB apb = new AdministradorPB(150, PB, Color.yellow, true);
         apb.setMessage("Se ha listado la base de datos de manera exitosa");
         apb.start();
+        Dba db = new Dba("./Nilaccdb.accdb");
+        db.conectar();
+        try {
+            
+            String acum = "";
+            db.query.execute("select Id,ProductID,Category,SubCategory,ProductName,Sales,Quantity,Discount,Profit FROM TenRecord");
+            ResultSet rs = db.query.getResultSet();
+            while (rs.next()) {
+                String ID = rs.getString(1);
+                String RowID = rs.getString(2);
+                String OrderID = rs.getString(3);
+                String orderDate = rs.getString(4);
+                String customerID = rs.getString(5);
+                String country = rs.getString(6);
+                String city = rs.getString(7);
+                String productID = rs.getString(8);
+                String profit = rs.getString(9);
+                acum+="Registro "+ID+"   "+RowID+" "+OrderID+" "+orderDate+" "+customerID+" "+country+" "+city+" "+productID+" "+profit+"\n";
+                
+            }
+            TA_Listar.setText(acum);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        db.desconectar();
         
     }//GEN-LAST:event_jButton5MouseClicked
 
@@ -558,6 +667,14 @@ db.query.execute("INSERT INTO TenRecord ([Order ID],[Order Date],[Ship Date],[Sh
         delDB();
         
     }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        // TODO add your handling code here:
+        
+        TA_Listar.setText("");
+        JOptionPane.showMessageDialog(this, "Se ha limpiado correctamente");
+        
+    }//GEN-LAST:event_jButton6MouseClicked
 
     /**
      * @param args the command line arguments

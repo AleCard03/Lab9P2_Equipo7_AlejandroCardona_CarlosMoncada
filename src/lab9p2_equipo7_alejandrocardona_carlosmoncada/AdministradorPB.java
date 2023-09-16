@@ -10,9 +10,11 @@ public class AdministradorPB extends Thread {
     private JProgressBar pb;
     private Color color;
     private boolean run;
+    private boolean vivo;
     private String message;
 
     public AdministradorPB(int delay, JProgressBar pb, Color color, boolean run) {
+        setVivo(true);
         this.delay = delay;
         this.pb = pb;
         this.color = color;
@@ -28,10 +30,19 @@ public class AdministradorPB extends Thread {
         this.message = message;
     }
 
+    public boolean isVivo() {
+        return vivo;
+    }
+
+    public void setVivo(boolean vivo) {
+        this.vivo = vivo;
+    }
+
     
     
     @Override
     public void run() {
+        setVivo(true);
         pb.setValue(0);
         pb.setBackground(color);
         while (run) {
@@ -43,6 +54,7 @@ public class AdministradorPB extends Thread {
                 if(pb.getValue()==100){
                     
                     run = false;
+                    setVivo(false);
                     JOptionPane.showMessageDialog(null, message);
                 }
 
