@@ -4,6 +4,7 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.UIManager;
+import javax.swing.JTextArea;
 
 public class AdministradorPB extends Thread {
 
@@ -12,14 +13,27 @@ public class AdministradorPB extends Thread {
     private boolean run;
     private boolean vivo;
     private String message;
+    private JTextArea ta;
+    private String imprimir;
 
     public AdministradorPB(int delay, JProgressBar pb, boolean run) {
         setVivo(true);
         this.delay = delay;
         this.pb = pb;
         this.run = run;
+        this.ta = null;
         
     }
+
+    public AdministradorPB(int delay, JProgressBar pb, boolean run, JTextArea ta, String imprimir) {
+        this.delay = delay;
+        this.pb = pb;
+        this.run = run;
+        this.ta = ta;
+        this.imprimir = imprimir;
+    }
+    
+    
     //delay -> 300 para 6 segundos
 
     public String getMessage() {
@@ -64,6 +78,11 @@ public class AdministradorPB extends Thread {
                     run = false;
                     setVivo(false);
                     JOptionPane.showMessageDialog(null, message);
+                    if(ta != null){
+                        
+                        ta.setText(imprimir);
+                        
+                    }
                 }
 
             } catch (Exception e) {

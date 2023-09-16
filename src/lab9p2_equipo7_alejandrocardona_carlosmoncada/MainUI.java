@@ -469,7 +469,7 @@ public class MainUI extends javax.swing.JFrame {
         
         AdministradorPB apb = new AdministradorPB(300, PB,true);
         apb.setMessage("Se ha agregado a la base de datos de manera exitosa");
-        apb.start();
+        
         
         
         String orderid=Order.getText();
@@ -494,7 +494,7 @@ public class MainUI extends javax.swing.JFrame {
         String subcategory=Sub_Category.getText();
 
         Agregar a = new Agregar(orderid, orderdate, shipdate, shipmode, costumerid, customername, segment, country, city, state, postalcode, region, productoid, category, subcategory, productname, sales, cuantity, discount, profit);
-        
+        apb.start();
         
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -502,9 +502,7 @@ public class MainUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         UIManager.put("nimbusOrange", Color.green);
-        AdministradorPB apb = new AdministradorPB(200, PB, true);
-        apb.setMessage("Se ha listado la base de datos de manera exitosa");
-        apb.start();
+        
         
         
         Dba db = new Dba("./Nilaccdb.accdb");
@@ -527,10 +525,10 @@ public class MainUI extends javax.swing.JFrame {
 
             }
             
-            if(apb.getPb().getValue()==100){
-                TA_Listar.setText(salida);
-            }
             
+            AdministradorPB apb = new AdministradorPB(200, PB, true, TA_Listar,salida);
+            apb.setMessage("Se ha listado la base de datos de manera exitosa");
+            apb.start();
         } catch (Exception e) {
         }
         
@@ -540,9 +538,7 @@ public class MainUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         UIManager.put("nimbusOrange", Color.orange);
-        AdministradorPB apb = new AdministradorPB(250, PB,true);
-        apb.setMessage("Se ha listado la base de datos de manera exitosa");
-        apb.start();
+        
         
         Dba db = new Dba("./Nilaccdb.accdb");
         db.conectar();
@@ -564,7 +560,9 @@ public class MainUI extends javax.swing.JFrame {
                 salida += "\tdiscount:" + discount + "\n\n\n";
 
             }
-            TA_Listar.setText(salida);
+            AdministradorPB apb = new AdministradorPB(250, PB, true, TA_Listar,salida);
+            apb.setMessage("Se ha listado la base de datos de manera exitosa");
+            apb.start();
         } catch (Exception e) {
         }
         
@@ -574,9 +572,7 @@ public class MainUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         
 UIManager.put("nimbusOrange", Color.red);
-        AdministradorPB apb = new AdministradorPB(300, PB, true);
-        apb.setMessage("Se ha listado la base de datos de manera exitosa");
-        apb.start();
+        
         
         
         
@@ -599,7 +595,9 @@ UIManager.put("nimbusOrange", Color.red);
                 acum+="Registro "+ID+"  \n "+RowID+" \n"+OrderID+"\n "+orderDate+" \n"+customerID+"\n "+country+" \n"+city+" \n"+productID+"\n\n\n";
                 
             }
-            TA_Listar.setText(acum);
+            AdministradorPB apb = new AdministradorPB(200, PB, true, TA_Listar,acum);
+            apb.setMessage("Se ha listado la base de datos de manera exitosa");
+            apb.start();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -614,9 +612,7 @@ UIManager.put("nimbusOrange", Color.red);
         // TODO add your handling code here:
         
         UIManager.put("nimbusOrange", Color.blue);
-        AdministradorPB apb = new AdministradorPB(150, PB,true);
-        apb.setMessage("Se ha listado la base de datos de manera exitosa");
-        apb.start();
+        
         Dba db = new Dba("./Nilaccdb.accdb");
         db.conectar();
         try {
@@ -637,7 +633,9 @@ UIManager.put("nimbusOrange", Color.red);
                 acum+="Registro "+ID+"  \n "+RowID+"\n "+OrderID+" \n "+orderDate+" "+customerID+"\n "+country+"\n "+city+" \n"+productID+" \n"+profit+"\n\n\n";
                 
             }
-            TA_Listar.setText(acum);
+            AdministradorPB apb = new AdministradorPB(200, PB, true, TA_Listar,acum);
+            apb.setMessage("Se ha listado la base de datos de manera exitosa");
+            apb.start();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
