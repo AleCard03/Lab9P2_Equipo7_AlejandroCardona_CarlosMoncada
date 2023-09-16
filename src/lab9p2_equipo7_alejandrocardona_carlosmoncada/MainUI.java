@@ -517,6 +517,7 @@ public class MainUI extends javax.swing.JFrame {
 
         Agregar a = new Agregar(orderid, orderdate, shipdate, shipmode, costumerid, customername, segment, country, city, state, postalcode, region, productoid, category, subcategory, productname, sales, cuantity, discount, profit);
         AdministradorPB apb = new AdministradorPB(300, PB,true,tfs);
+        System.out.println("");
         apb.start();
         apb.setMessage("Se ha agregado a la base de datos de manera exitosa");
         
